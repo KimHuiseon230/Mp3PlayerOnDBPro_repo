@@ -13,14 +13,13 @@ import java.text.SimpleDateFormat
 
 class PlayActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityPlayBinding
+    private var playList: MutableList<Parcelable>? = null
+    private var currentPosition: Int = 0
     val ALBUM_IMAGE_SIZE = 90
     var mediaPlayer: MediaPlayer? = null
     var mp3playerJob: Job? = null
     var pauseFlag = false
     lateinit var musicData: MusicData
-    private var playList: MutableList<Parcelable>? = null
-    private var currentposition: Int = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +30,8 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
 //        musicData = intent.getSerializableExtra("musicData") as MusicData
         // 현재 위치값이라 생각해도 됨
         playList = intent.getParcelableArrayListExtra("parcelableList")
-        currentposition = intent.getIntExtra("position", 0)
-        musicData= playList?.get(currentposition) as MusicData
-
+        currentPosition = intent.getIntExtra("position", 0)
+        musicData= playList?.get(currentPosition) as MusicData
 
         //화면에 바인딩 진행
         binding.albumTitle.text = musicData.title
@@ -51,7 +49,10 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         //이벤트처리(일시정지, 실행, 돌아가기, 정지, 싱크바 조절)
         binding.listButton.setOnClickListener(this)
         binding.playButton.setOnClickListener(this)
-        binding.stopButton.setOnClickListener(this)
+        binding.nextButton.setOnClickListener(this)
+        binding.backButton.setOnClickListener(this)
+//        binding.stopButton.setOnClickListener(this) -- 사용 안함
+
         binding.seekBar.max = mediaPlayer!!.duration
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -81,7 +82,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
                     pauseFlag = true
                 } else {
                     mediaPlayer?.start()
-                    binding.playButton.setImageResource(R.drawable.pause)
+                    binding.playButton.setImageResource(R.drawable.stop_24)
                     pauseFlag = false
 
                     //코루틴으로 음악을 재생
@@ -111,16 +112,16 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
                     }//end of mp3PlayerJob
                 }
             }
-            R.id.stopButton -> {
-                mediaPlayer?.stop()
-                mp3playerJob?.cancel()
-                mediaPlayer = MediaPlayer.create(this, musicData.getMusicUri())
-                binding.seekBar.progress = 0
-                binding.playDuration.text = "00:00"
-                binding.seekBar.max = mediaPlayer!!.duration
-                binding.totalDuration.text = SimpleDateFormat("mm:ss").format(musicData.duration)
-                binding.playButton.setImageResource(R.drawable.play_24)
-            }
+            R.id.nextButton -> {
+                if (currentPosition < playList!!.size - 1) { ++currentPosition }
+                else { currentPosition = 0 }
+                getPositions()
+            }// R.id.nextButton
+            R.id.backButton -> {
+                if (currentPosition == 0) { currentPosition =playList!!.size - 1 }
+                else { --currentPosition }
+                getPositions()
+            } // R.id.backButton
         }
     }
 
@@ -131,4 +132,27 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         mediaPlayer = null
         finish()
     }
+    fun getPositions(){
+        mediaPlayer?.stop()
+        musicData = playList?.get(currentPosition) as MusicData
+        binding.albumTitle.text = musicData?.title
+        binding.albumArtist.text = musicData?.artist
+        binding.totalDuration.text = SimpleDateFormat("mm:ss").format(musicData?.duration)
+        binding.playDuration.text = "00:00"
+        val bitmap = musicData?.getAlbumBitmap(this, ALBUM_IMAGE_SIZE)
+        if (bitmap != null) { binding.albumImage.setImageBitmap(bitmap) }
+        else { binding.albumImage.setImageResource(R.drawable.music_24) }
+        mediaPlayer = MediaPlayer.create(this, musicData?.getMusicUri())
+    }
 }
+//++++ 사용 보류 ++++
+/*         R.id.stopButton -> {
+             mediaPlayer?.stop()
+             mp3playerJob?.cancel()
+             mediaPlayer = MediaPlayer.create(this, musicData.getMusicUri())
+             binding.seekBar.progress = 0
+             binding.playDuration.text = "00:00"
+             binding.seekBar.max = mediaPlayer!!.duration
+             binding.totalDuration.text = SimpleDateFormat("mm:ss").format(musicData.duration)
+             binding.playButton.setImageResource(R.drawable.play_24)
+         }*/
