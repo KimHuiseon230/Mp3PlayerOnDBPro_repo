@@ -82,9 +82,9 @@ class MainActivity : AppCompatActivity() {
             // 좋아요 된것만 가져오기
             R.id.menu_like -> {
                 val musicDataLikeList = dbOpenHelper.selectMusicLike()
-                Log.e("MainActivity", "musicDataLikeList.size = ${musicDataLikeList?.size}")
-                if (musicDataLikeList!!.size <= 0 || musicDataLikeList == null) {
-                    Toast.makeText(applicationContext, "좋아요리스트가 없습니다.", Toast.LENGTH_SHORT).show()
+                if (musicDataLikeList == null) {
+                    Log.e("MainActivity", "musicDataLikeList.size = 0")
+                    Toast.makeText(applicationContext, "좋아요 리스트가 없습니다.", Toast.LENGTH_SHORT).show()
                 } else {
                     musicDataList?.clear()
                     dbOpenHelper.selectMusicLike()?.let { musicDataList?.addAll(it) }
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_main -> {
                 val musicDataAllList = dbOpenHelper.selectAllmusicTBL()
                 if (musicDataAllList!!.size <= 0 || musicDataAllList == null) {
-                    Toast.makeText(applicationContext, "모든리스트가 없습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "모든 리스트가 없습니다.", Toast.LENGTH_SHORT).show()
                 } else {
                     musicDataList?.clear()
                     dbOpenHelper.selectAllmusicTBL()?.let { musicDataList?.addAll(it) }
