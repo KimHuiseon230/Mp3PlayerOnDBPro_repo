@@ -1,6 +1,7 @@
 package com.example.mp3playerondbpro
 
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +45,8 @@ class MainActivity : AppCompatActivity() {
             //승인요청
             ActivityCompat.requestPermissions(this, permission, REQUEST_CODE)
         }
-
+        val intent = Intent(this, LoadingActivity::class.java)
+        startActivity(intent)
     }
 
 

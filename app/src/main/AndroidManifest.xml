@@ -14,6 +14,12 @@
         android:theme="@style/Theme.Mp3PlayerOnDBPro"
         tools:targetApi="31">
         <activity
+            android:name=".NotificationPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".LoadingActivity"
+            android:exported="false" />
+        <activity
             android:name=".PlayActivity"
             android:exported="false" />
         <activity
