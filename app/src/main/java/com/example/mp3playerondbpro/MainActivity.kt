@@ -16,8 +16,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mp3playerondbpro.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     companion object {
         val REQUEST_CODE = 100
         val DB_NAME = "musicDB2"
@@ -47,6 +48,12 @@ class MainActivity : AppCompatActivity() {
         }
         val intent = Intent(this, LoadingActivity::class.java)
         startActivity(intent)
+
+        //tooleBar
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        binding.navigation.setNavigationItemSelectedListener(this)
     }
 
 
@@ -176,5 +183,9 @@ class MainActivity : AppCompatActivity() {
         musicRecyclerAdapter = MusicRecyclerAdapter(this, musicDataList!!)
         binding.recyclerView.adapter = musicRecyclerAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        TODO("Not yet implemented")
     }
 }
