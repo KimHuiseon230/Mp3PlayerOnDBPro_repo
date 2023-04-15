@@ -1,4 +1,4 @@
-package com.example.mp3playerondbpro
+package com.example.mp3playerondbpro.Music
 
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
+import com.example.mp3playerondbpro.R
 import com.example.mp3playerondbpro.databinding.ActivityPlayBinding
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -111,16 +112,24 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
     }
     fun getPositions(){
         mediaPlayer?.stop()
-        musicData = playList?.get(currentPosition) as MusicData
-        binding.albumTitle.text = musicData?.title
-        binding.albumArtist.text = musicData?.artist
-        binding.totalDuration.text = SimpleDateFormat("mm:ss").format(musicData?.duration)
+        musicData = playList!!.get(currentPosition) as MusicData
+        mediaPlayer = MediaPlayer.create(this, musicData.getMusicUri())
+        binding.seekBar.progress = 0
         binding.playDuration.text = "00:00"
-        val bitmap = musicData?.getAlbumBitmap(this, ALBUM_IMAGE_SIZE)
-        if (bitmap != null) { binding.albumImage.setImageBitmap(bitmap) }
-        else { binding.albumImage.setImageResource(R.drawable.music_24) }
+        binding.seekBar.max = mediaPlayer?.duration ?: 0
+        binding.totalDuration.text =
+            SimpleDateFormat("mm:ss").format(musicData.duration)
+        binding.albumTitle.text = musicData.title
+        binding.albumArtist.text = musicData.artist
         binding.playButton.setImageResource(R.drawable.pause_24)
-        mediaPlayer = MediaPlayer.create(this, musicData?.getMusicUri())
+        val bitmap = musicData.getAlbumBitmap(this, ALBUM_IMAGE_SIZE)
+        if (bitmap != null) {
+            binding.albumImage.setImageBitmap(bitmap)
+        } else {
+            binding.albumImage.setImageResource(R.drawable.music_24)
+        }
+        mediaPlayer?.start()
+
     } // end of getPositions
 
     fun getCoroutines (){

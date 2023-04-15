@@ -1,4 +1,4 @@
-package com.example.mp3playerondbpro
+package com.example.mp3playerondbpro.Music
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mp3playerondbpro.MainActivity
+import com.example.mp3playerondbpro.R
 import com.example.mp3playerondbpro.databinding.ItemRecyclerBinding
 import java.text.SimpleDateFormat
 

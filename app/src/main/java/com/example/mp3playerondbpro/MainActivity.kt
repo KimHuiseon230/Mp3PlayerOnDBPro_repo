@@ -9,16 +9,22 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mp3playerondbpro.Genre.MainActivity3
+import com.example.mp3playerondbpro.Music.DBOpenHelper
+import com.example.mp3playerondbpro.Music.MusicData
+import com.example.mp3playerondbpro.Music.MusicRecyclerAdapter
+import com.example.mp3playerondbpro.Youtube.MainActivity2
 import com.example.mp3playerondbpro.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    View.OnClickListener {
     companion object {
         val REQUEST_CODE = 100
         val DB_NAME = "musicDB2"
@@ -27,11 +33,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     //*********************************************************************************************
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     //데이타베이스 생성
     private val dbOpenHelper by lazy { DBOpenHelper(this, DB_NAME, VERSION) }
     val permission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
     var musicDataList: MutableList<MusicData>? = mutableListOf<MusicData>()
     lateinit var musicRecyclerAdapter: MusicRecyclerAdapter
+
     //*********************************************************************************************
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,9 +62,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         binding.navigation.setNavigationItemSelectedListener(this)
+        binding.button.setOnClickListener(this)
+        binding.button2.setOnClickListener(this)
+        binding.button3.setOnClickListener(this)
+
     }
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
 
@@ -111,6 +121,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     musicRecyclerAdapter.notifyDataSetChanged()
                 }
             }
+            android.R.id.home -> {
+                onBackPressed() // 뒤로가기 버튼과 동일한 기능
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -118,7 +132,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE) {
@@ -187,5 +201,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         TODO("Not yet implemented")
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.button -> {
+                intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.button2 -> {
+                intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
+            }
+            R.id.button3 -> {
+                intent = Intent(this, MainActivity3::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

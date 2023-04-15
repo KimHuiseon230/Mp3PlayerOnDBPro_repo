@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mp3PlayerOnDBPro</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">CloseDrawer</string>
 </resources>

@@ -6,30 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".PlayActivity">
+    tools:context=".Music.PlayActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_weight="3.5"
         android:orientation="vertical"
         android:weightSum="8">
 
-        <ImageView
-            android:id="@+id/albumImage"
+        <!-- toolbar 추가 -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:layout_weight="5"
-            android:src="@drawable/music_24" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:navigationIcon="@drawable/arrow_back_24"
+            app:popupTheme="@style/ThemeOverlay.Material3.BottomAppBar" />
 
+        <!-- 앨범 정보 -->
         <TextView
             android:id="@+id/albumTitle"
+            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:text="타이틀"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -39,14 +41,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
             android:text="아티스트"
             android:textSize="20sp" />
 
+        <ImageView
+            android:id="@+id/albumImage"
+            android:layout_width="250dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:src="@drawable/music_24" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
 
             <TextView
                 android:id="@+id/playDuration"
@@ -54,9 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:gravity="left"
-                android:text="00:00">
-
-            </TextView>
+                android:text="00:00" />
 
             <View
                 android:layout_width="0dp"
@@ -69,15 +76,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:gravity="right"
-                android:text="00:00">
+                android:text="00:00" />
 
-            </TextView>
         </LinearLayout>
 
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -142,12 +149,13 @@
             android:minHeight="48dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/shuffle_24" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/listButton"
@@ -158,17 +166,7 @@
             android:contentDescription="list"
             android:minHeight="60dp"
             android:scaleType="fitCenter"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/list_alt_24" />
     </LinearLayout>
 </LinearLayout>
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/stopButton"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:adjustViewBounds="false"-->
-    <!--            android:contentDescription="next"-->
-    <!--            android:minHeight="48dp"-->
-    <!--            android:scaleType="fitCenter"-->
-    <!--            app:srcCompat="@drawable/stop_24" />-->

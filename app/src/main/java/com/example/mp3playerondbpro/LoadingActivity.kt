@@ -11,7 +11,6 @@ class LoadingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         startLoading()
-
     }
     fun startLoading() {
         Handler().postDelayed({
