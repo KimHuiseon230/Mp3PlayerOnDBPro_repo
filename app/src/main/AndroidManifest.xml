@@ -21,9 +21,6 @@
             android:name=".Youtube.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".NotificationPlayer"
-            android:exported="false" />
-        <activity
             android:name=".LoadingActivity"
             android:exported="false" />
         <activity

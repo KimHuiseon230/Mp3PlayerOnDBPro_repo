@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/menu_like"
-        android:icon="@drawable/favorite_24"
+        android:icon="@drawable/favorite_24_menu"
         android:title="좋아요"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_main"
-        android:icon="@drawable/list_alt_24"
+        android:icon="@drawable/playlist_play_24_menu"
         android:title="전체보기"
         app:showAsAction="ifRoom" />
     <item

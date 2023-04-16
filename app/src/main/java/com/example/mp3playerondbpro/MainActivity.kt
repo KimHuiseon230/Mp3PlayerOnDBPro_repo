@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,6 +66,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.button.setOnClickListener(this)
         binding.button2.setOnClickListener(this)
         binding.button3.setOnClickListener(this)
+        // 툴바를 액티비티에 설정
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // 패키지명을 숨기기 위해 타이틀을 비움
+        supportActionBar?.title = ""
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -120,10 +127,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     dbOpenHelper.selectAllmusicTBL()?.let { musicDataList?.addAll(it) }
                     musicRecyclerAdapter.notifyDataSetChanged()
                 }
-            }
-            android.R.id.home -> {
-                onBackPressed() // 뒤로가기 버튼과 동일한 기능
-                return true
             }
         }
         return super.onOptionsItemSelected(item)

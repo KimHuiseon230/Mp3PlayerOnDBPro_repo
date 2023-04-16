@@ -31,7 +31,7 @@ class MusicRecyclerAdapter(val context: Context, val musicList: MutableList<Musi
         if (bitmap != null) {
             binding.ivAlbumArt.setImageBitmap(bitmap)
         } else {
-            binding.ivAlbumArt.setImageResource(R.drawable.music_24)
+            binding.ivAlbumArt.setImageResource(R.drawable.ic_musical)
         }
         when(musicList.get(position).likes ){
             0->{ binding.ivItemLike.setImageResource(R.drawable.favorite_border_24)}

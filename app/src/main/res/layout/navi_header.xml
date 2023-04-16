@@ -13,7 +13,7 @@
         android:adjustViewBounds="true"
         android:padding="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/loding" />
+        android:src="@drawable/myimg" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:textSize="10sp"
             android:text="장르의 취향을 알려주세요" />
     </LinearLayout>
 
@@ -48,19 +49,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="나의 계정관리"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:textSize="10sp"
             android:text="asdf@naver.com" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:textSize="10sp"
             android:text="VIP 무제한 듣기 멤버쉽" />
 
     </LinearLayout>

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.SeekBar
+import androidx.appcompat.widget.Toolbar
 import com.example.mp3playerondbpro.R
 import com.example.mp3playerondbpro.databinding.ActivityPlayBinding
 import kotlinx.coroutines.*
@@ -41,7 +43,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         if (bitmap != null) {
             binding.albumImage.setImageBitmap(bitmap)
         } else {
-            binding.albumImage.setImageResource(R.drawable.music_24)
+            binding.albumImage.setImageResource(R.drawable.ic_musical)
         }
         //음악파일의 객체를 가져옴
         mediaPlayer = MediaPlayer.create(this, musicData.getMusicUri())
@@ -51,6 +53,16 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         binding.nextButton.setOnClickListener(this)
         binding.backButton.setOnClickListener(this)
 //        binding.stopButton.setOnClickListener(this) -- 사용 안함
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // 툴바를 액티비티에 설정
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // 패키지명을 숨기기 위해 타이틀을 비움
+        supportActionBar?.title = ""
 
         binding.seekBar.max = mediaPlayer!!.duration
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -102,7 +114,15 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
             } // R.id.backButton
         } // end of  when (v?.id)
     }
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed() // 뒤로가기 버튼과 동일한 기능
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun onBackPressed() {
         mediaPlayer?.stop()
         mp3playerJob?.cancel()
@@ -126,7 +146,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         if (bitmap != null) {
             binding.albumImage.setImageBitmap(bitmap)
         } else {
-            binding.albumImage.setImageResource(R.drawable.music_24)
+            binding.albumImage.setImageResource(R.drawable.ic_musical)
         }
         mediaPlayer?.start()
 

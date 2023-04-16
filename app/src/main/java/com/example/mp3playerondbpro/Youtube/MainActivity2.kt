@@ -3,7 +3,6 @@ package com.example.mp3playerondbpro.Youtube
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +18,17 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(binding.root)
 
         youtubeList = mutableListOf<youtubeData>()
-        youtubeList.add(youtubeData(R.drawable.music_24, "ASMRTest1", "EsD-QcfHkDQ"))
-        youtubeList.add(youtubeData(R.drawable.music_24, "ASMRTest2", "ir7uFl7DGyA"))
-        youtubeList.add(youtubeData(R.drawable.music_24, "ASMRTest3", "sleVP0qisl8"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string1), "dvsgp4Op2z0"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string2), "sgL_waepEL4"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string3),"Jwpnifuh0KI"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string4), "nSkPYON34Ok"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string5), "Tz6uGjDgcDQ"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string6), "llWNm5kyh34"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string7), "w6IQXHYw_hw"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string8), "KdZv80_eXW8"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string9), "7yRiztcFPI0"))
+        youtubeList.add(youtubeData(R.drawable.music_24, getString(R.string.youtube_string10), "Bs47iAKwMqw"))
+
 
         binding.recyclerView.adapter = CustomYoutubeAdapter(youtubeList)
         val layoutManager = LinearLayoutManager(this)
@@ -31,6 +38,12 @@ class MainActivity2 : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 툴바를 액티비티에 설정
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // 패키지명을 숨기기 위해 타이틀을 비움
+        supportActionBar?.title = ""
 
         //+++ toolbar
     }// 툴바의 뒤로가기 버튼 클릭 시 액티비티 종료
@@ -43,6 +56,4 @@ class MainActivity2 : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }

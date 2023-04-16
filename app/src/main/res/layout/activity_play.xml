@@ -11,16 +11,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3.5"
+        android:layout_weight="3"
         android:orientation="vertical"
-        android:weightSum="8">
+        android:weightSum="5">
 
         <!-- toolbar 추가 -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/white"
             android:elevation="4dp"
             app:navigationIcon="@drawable/arrow_back_24"
             app:popupTheme="@style/ThemeOverlay.Material3.BottomAppBar" />
@@ -28,10 +28,10 @@
         <!-- 앨범 정보 -->
         <TextView
             android:id="@+id/albumTitle"
-            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:text="타이틀"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -45,17 +45,48 @@
             android:textSize="20sp" />
 
         <ImageView
+            android:padding="40dp"
             android:id="@+id/albumImage"
             android:layout_width="250dp"
             android:layout_height="180dp"
             android:layout_gravity="center"
-            android:layout_weight="4"
-            android:src="@drawable/music_24" />
+            android:layout_margin="20dp"
+            android:background="#EFEDED"
+            android:scaleType="centerCrop"
+            android:layout_weight="2.5"
+            android:src="@drawable/ic_musical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/listButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:contentDescription="list"
+                android:minHeight="40dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/playlist_play_24" />
+
+            <ImageView
+                android:id="@+id/likeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:contentDescription="list"
+                android:minHeight="40dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/favorite_border_24" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="40dp">
 
             <TextView
                 android:id="@+id/playDuration"
@@ -67,7 +98,7 @@
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="8dp"
                 android:layout_weight="1" />
 
             <TextView
@@ -104,6 +135,7 @@
             android:contentDescription="list"
             android:minHeight="48dp"
             android:scaleType="fitCenter"
+            android:padding="7dp"
             android:src="@drawable/repeat_24" />
 
         <ImageView
@@ -124,7 +156,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="false"
             android:contentDescription="play"
-            android:minHeight="48dp"
+            android:minHeight="65dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/play_24" />
 
@@ -147,26 +179,12 @@
             android:adjustViewBounds="false"
             android:contentDescription="next"
             android:minHeight="48dp"
+            android:padding="7dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/shuffle_24" />
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/listButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:adjustViewBounds="false"
-            android:contentDescription="list"
-            android:minHeight="60dp"
-            android:scaleType="fitCenter"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/list_alt_24" />
-    </LinearLayout>
 </LinearLayout>

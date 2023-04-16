@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.example.mp3playerondbpro.R
 import com.example.mp3playerondbpro.databinding.ActivityMain3Binding
 
@@ -18,14 +19,14 @@ class MainActivity3 : AppCompatActivity() {
 
         // 그리드 뷰 어댑터 설정
         genreList = mutableListOf(
-            Genre(R.drawable.ic_launcher_background, "Pop"),
-            Genre(R.drawable.ic_launcher_background, "Rock"),
-            Genre(R.drawable.ic_launcher_background, "Hip Hop"),
-            Genre(R.drawable.ic_launcher_background, "R&B"),
-            Genre(R.drawable.ic_launcher_background, "Jazz"),
-            Genre(R.drawable.ic_launcher_background, "K-pop"),
-            Genre(R.drawable.ic_launcher_background, "Electronic"),
-            Genre(R.drawable.ic_launcher_background, "Reggae")
+            Genre(R.drawable.mp3_img_01, "Pop"),
+            Genre(R.drawable.mp3_img_02, "Rock"),
+            Genre(R.drawable.mp3_img_03, "Hip Hop"),
+            Genre(R.drawable.mp3_img_04, "R&B"),
+            Genre(R.drawable.mp3_img_05, "Jazz"),
+            Genre(R.drawable.mp3_img_06, "K-pop"),
+            Genre(R.drawable.mp3_img_07, "Electronic"),
+            Genre(R.drawable.mp3_img_08, "Reggae")
         )
         binding.gridView.adapter = GenreAdapter(genreList)
 
@@ -37,6 +38,14 @@ class MainActivity3 : AppCompatActivity() {
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 Toast.makeText(this, "Clicked item $position", Toast.LENGTH_SHORT).show()
             }
+
+        // 툴바를 액티비티에 설정
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // 패키지명을 숨기기 위해 타이틀을 비움
+        supportActionBar?.title = ""
+
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
