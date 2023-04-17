@@ -52,6 +52,7 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
         binding.playButton.setOnClickListener(this)
         binding.nextButton.setOnClickListener(this)
         binding.backButton.setOnClickListener(this)
+        binding.shuffleButton.setOnClickListener(this)
 //        binding.stopButton.setOnClickListener(this) -- 사용 안함
 
         setSupportActionBar(binding.toolbar)
@@ -112,6 +113,12 @@ class PlayActivity : AppCompatActivity(), View.OnClickListener {
                 mediaPlayer?.start()
                 getCoroutines()
             } // R.id.backButton
+            R.id.shuffleButton ->{
+                currentPosition = (Math.random() * playList!!.size).toInt()
+                getPositions()
+                mediaPlayer?.start()
+                getCoroutines()
+            } // R.id.shuffleButton
         } // end of  when (v?.id)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
